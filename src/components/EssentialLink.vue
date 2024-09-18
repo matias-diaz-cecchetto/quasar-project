@@ -1,5 +1,5 @@
 <template>
-  <q-item clickable tag="a" target="_blank" :href="props.link">
+  <q-item clickable tag="a" @click="navigateTo">
     <q-item-section v-if="props.icon" avatar>
       <q-icon :name="props.icon" />
     </q-item-section>
@@ -12,6 +12,10 @@
 </template>
 
 <script setup>
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
 defineOptions({
   name: "EssentialLink",
 });
@@ -37,4 +41,29 @@ const props = defineProps({
     default: "",
   },
 });
+
+/* const saludo = () => {
+  console.log("Hola mundo");
+};
+saludo(); */
+
+const navigateTo = () => {
+  // Una manera
+  /* if (props.link.startsWith("http")) {
+    return window.open(props.link, "_blank");
+  }
+  return router.push({ name: props.link }); */
+
+  // Otra manera
+
+  try {
+    props.link.startsWith("http")
+      ? window.open(props.link, "_blank")
+      : router.push({ name: props.link });
+  } catch (error) {
+    console.log("Ruta no valida: ", error);
+  }
+};
+
+console.log(props);
 </script>

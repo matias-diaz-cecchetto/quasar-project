@@ -1,36 +1,33 @@
 <template>
   <q-layout view="lHh Lpr lFf">
+    <!-- Barra del Header o barra de navegacion -->
+
     <q-header elevated>
       <q-toolbar>
         <q-btn
           flat
           dense
           round
-          icon="menu"
+          icon="las la-bars"
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+        <q-toolbar-title @click="navigateHome"> Quasar App </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
+    <!-- Propiedad para el menu lateral -->
+    <!-- side="right" (abir sobre la derecha)-->
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+      <!-- Lista -->
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+        <!-- Encabezado de la lista -->
+        <q-item-label header> Essential Links </q-item-label>
 
+        <!-- Items de la lista -->
         <EssentialLink
           v-for="link in linksList"
           :key="link.title"
@@ -46,61 +43,43 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import { ref } from "vue";
+import EssentialLink from "components/EssentialLink.vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 defineOptions({
-  name: 'MainLayout'
-})
+  name: "MainLayout",
+});
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: "Docs",
+    caption: "quasar.dev",
+    icon: "las la-graduation-cap",
+    link: "https://quasar.dev",
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+    title: "Typography",
+    caption: "Tipos de letras en Quasar",
+    icon: "las la-align-left",
+    link: "typography",
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    title: "Flex Layout",
+    caption: "Estilos con flex",
+    icon: "las la-layer-group",
+    link: "flex",
   },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
+];
 
-const leftDrawerOpen = ref(false)
+const leftDrawerOpen = ref(false);
 
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value
+function toggleLeftDrawer() {
+  leftDrawerOpen.value = !leftDrawerOpen.value;
 }
+
+const navigateHome = () => {
+  router.push("/");
+};
 </script>
