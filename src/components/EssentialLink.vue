@@ -64,6 +64,4 @@ const navigateTo = () => {
     console.log("Ruta no valida: ", error);
   }
 };
-
-console.log(props);
 </script>

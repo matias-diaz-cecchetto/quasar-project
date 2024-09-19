@@ -10,18 +10,18 @@
           round
           icon="las la-bars"
           aria-label="Menu"
-          @click="toggleLeftDrawer"
+          @click="toggleSideMenu"
         />
 
         <q-toolbar-title @click="navigateHome"> Quasar App </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <!-- TODO: <div>Quasar v{{ $q.version }}</div> -->
       </q-toolbar>
     </q-header>
 
     <!-- Propiedad para el menu lateral -->
     <!-- side="right" (abir sobre la derecha)-->
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer v-model="sideMenuOpen" show-if-above bordered>
       <!-- Lista -->
       <q-list>
         <!-- Encabezado de la lista -->
@@ -43,41 +43,17 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
 import { useRouter } from "vue-router";
+import { linksList } from "../router/link-list";
+import useUI from "../composables/useUI";
+
 const router = useRouter();
+const { sideMenuOpen, toggleSideMenu } = useUI();
 
 defineOptions({
   name: "MainLayout",
 });
-
-const linksList = [
-  {
-    title: "Docs",
-    caption: "quasar.dev",
-    icon: "las la-graduation-cap",
-    link: "https://quasar.dev",
-  },
-  {
-    title: "Typography",
-    caption: "Tipos de letras en Quasar",
-    icon: "las la-align-left",
-    link: "typography",
-  },
-  {
-    title: "Flex Layout",
-    caption: "Estilos con flex",
-    icon: "las la-layer-group",
-    link: "flex",
-  },
-];
-
-const leftDrawerOpen = ref(false);
-
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
-}
 
 const navigateHome = () => {
   router.push("/");
