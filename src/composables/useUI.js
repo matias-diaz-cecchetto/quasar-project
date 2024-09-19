@@ -1,3 +1,4 @@
+import { toggleSideMenu } from "src/store/ui/mutations";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
@@ -11,7 +12,18 @@ const useUI = () => {
 
   return {
     // Propiedad computada para vincular el estado del menú lateral
-    sideMenuOpen: computed(() => store.getters["ui/sideMenuOpen"]),
+    //sideMenuOpen: computed(() => store.getters["ui/sideMenuOpen"]),
+    sideMenuOpen: computed({
+      get() {
+        return store.getters["ui/sideMenuOpen"];
+      },
+
+      set(value) {
+        //console.log({ value });
+        store.commit("ui/toggleSideMenu");
+      },
+    }),
+
     toggleSideMenu() {
       // Mutations
       store.commit("ui/toggleSideMenu"); // Propiedad para poner el menu en "true o false"
