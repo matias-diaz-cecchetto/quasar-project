@@ -13,6 +13,16 @@ const routes = [
         component: () => import("pages/Typography.vue"),
       },
       { path: "flex", name: "flex", component: () => import("pages/Flex.vue") },
+      {
+        path: "dialog",
+        name: "dialog",
+        component: () => import("pages/Dialogs.vue"),
+      },
+      {
+        path: "forms",
+        name: "forms",
+        component: () => import("pages/Forms.vue"),
+      },
     ],
   },
 

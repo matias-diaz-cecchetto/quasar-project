@@ -17,4 +17,16 @@ export const linksList = [
     icon: "las la-layer-group",
     link: "flex",
   },
+  {
+    title: "Dialogs",
+    caption: "Alertas, dialogos, confirmaciones y mas...",
+    icon: "las la-bell",
+    link: "dialog",
+  },
+  {
+    title: "Forms",
+    caption: "Fomulario y captura de datos",
+    icon: "lab la-wpforms",
+    link: "forms",
+  },
 ];
