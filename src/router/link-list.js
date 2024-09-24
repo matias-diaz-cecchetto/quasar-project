@@ -35,4 +35,10 @@ export const linksList = [
     icon: "las la-table",
     link: "TablePage",
   },
+  {
+    title: "Graphic",
+    caption: "Graficos",
+    icon: "las la-chart-bar",
+    link: "GraphicPage",
+  },
 ];

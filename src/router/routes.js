@@ -46,6 +46,11 @@ const routes = [
         name: "TablePage",
         component: () => import("pages/Tables.vue"),
       },
+      {
+        path: "graphics",
+        name: "GraphicPage",
+        component: () => import("pages/Graphics.vue"),
+      },
     ],
     beforeEnter: (to, from, next) => {
       // Verificar si el usuario está autenticado
