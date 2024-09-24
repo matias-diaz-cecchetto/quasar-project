@@ -41,6 +41,11 @@ const routes = [
         name: "forms",
         component: () => import("pages/Forms.vue"),
       },
+      {
+        path: "tables",
+        name: "TablePage",
+        component: () => import("pages/Tables.vue"),
+      },
     ],
     beforeEnter: (to, from, next) => {
       // Verificar si el usuario está autenticado

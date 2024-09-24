@@ -29,7 +29,7 @@ export function login(email, password) {
         // Devolver error
         reject(new Error("Correo o contraseña incorrectos"));
       }
-    }, 1000);
+    }, 2000);
   });
 }
 

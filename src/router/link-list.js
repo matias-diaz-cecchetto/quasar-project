@@ -29,4 +29,10 @@ export const linksList = [
     icon: "lab la-wpforms",
     link: "forms",
   },
+  {
+    title: "Table",
+    caption: "Tablas y componentes",
+    icon: "las la-table",
+    link: "TablePage",
+  },
 ];

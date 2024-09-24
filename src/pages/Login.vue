@@ -62,21 +62,19 @@ function onSubmit() {
   loading.value = true;
 
   // Simulación de autenticación
-  setTimeout(() => {
-    loading.value = true;
+  loading.value = true;
 
-    login(useForm.value.email, useForm.value.password)
-      .then(() => {
-        // Redirigir al index si el login es exitoso
-        router.push("/");
-      })
-      .catch((error) => {
-        console.error(error.message); // Manejo de error
-      })
-      .finally(() => {
-        loading.value = false;
-      });
-  }, 1000);
+  login(useForm.value.email, useForm.value.password)
+    .then(() => {
+      // Redirigir al index si el login es exitoso
+      router.push("/");
+    })
+    .catch((error) => {
+      console.error(error.message); // Manejo de error
+    })
+    .finally(() => {
+      loading.value = false;
+    });
 }
 </script>
 
