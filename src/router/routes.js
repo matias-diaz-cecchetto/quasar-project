@@ -3,7 +3,7 @@ const routes = [
     // Ruta para el login (fuera del layout principal)
     path: "/login",
     name: "LoginPage",
-    component: () => import("pages/Login.vue"),
+    component: () => import("src/pages/auth/LoginPage.vue"),
     beforeEnter: (to, from, next) => {
       // Verificar si el usuario está autenticado
       const isAuthenticated = !!localStorage.getItem("authToken");
@@ -28,28 +28,32 @@ const routes = [
       {
         path: "typography",
         name: "typography",
-        component: () => import("pages/Typography.vue"),
+        component: () => import("src/pages/TypographyPage.vue"),
       },
-      { path: "flex", name: "flex", component: () => import("pages/Flex.vue") },
+      {
+        path: "flex",
+        name: "flex",
+        component: () => import("src/pages/FlexPage.vue"),
+      },
       {
         path: "dialog",
         name: "dialog",
-        component: () => import("pages/Dialogs.vue"),
+        component: () => import("src/pages/DialogsPage.vue"),
       },
       {
         path: "forms",
         name: "forms",
-        component: () => import("pages/Forms.vue"),
+        component: () => import("src/pages/FormsPage.vue"),
       },
       {
         path: "tables",
         name: "TablePage",
-        component: () => import("pages/Tables.vue"),
+        component: () => import("src/pages/TablePage.vue"),
       },
       {
         path: "graphics",
         name: "GraphicPage",
-        component: () => import("pages/Graphics.vue"),
+        component: () => import("src/pages/GraphicsPage.vue"),
       },
     ],
     beforeEnter: (to, from, next) => {
@@ -70,7 +74,7 @@ const routes = [
   // but you can also remove it
   {
     path: "/:catchAll(.*)*",
-    component: () => import("pages/ErrorNotFound.vue"),
+    component: () => import("src/pages/errors/ErrorNotFoundPage.vue"),
   },
 ];
 

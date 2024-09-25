@@ -65,22 +65,109 @@ import { ref } from "vue";
 
 // Propiedad reactiva para el tipo de gráfico de líneas
 // const lineChartType = ref("line");
+const selectedBarData = ref(null);
+const selectedPieData = ref(null);
 
 // Bar
 const barChartOptions = ref({
   chart: {
     id: "bar-chart",
     type: "bar",
+    height: 400,
+    toolbar: {
+      show: true,
+      tools: {
+        download: true, // Permite descargar el gráfico
+        selection: true, // Habilita selección
+        zoom: true,
+        zoomin: true,
+        zoomout: true,
+        pan: true,
+        reset: true,
+      },
+    },
+    events: {
+      dataPointSelection: function (event, chartContext, config) {
+        // Captura la categoría, serie y valor de la barra seleccionada
+        const selectedSeriesName =
+          config.w.config.series[config.seriesIndex].name;
+        const selectedCategory =
+          config.w.config.xaxis.categories[config.dataPointIndex];
+        const selectedValue =
+          config.w.config.series[config.seriesIndex].data[
+            config.dataPointIndex
+          ];
+
+        // Almacena los datos en la variable
+        selectedBarData.value = {
+          name: selectedSeriesName,
+          category: selectedCategory,
+          value: selectedValue,
+        };
+
+        // También puedes usar console.log para depurar
+        console.log("Barra seleccionada:", selectedBarData.value);
+      },
+    },
   },
+  // Datos del Eje X
   xaxis: {
     categories: ["Apple", "Banana", "Orange", "Grapes", "Mango"],
+    labels: {
+      style: {
+        colors: "#000",
+        fontSize: "12px",
+      },
+    },
   },
+  //Muestra el título del gráfico. align: Alineación del título (left, center, right).
   title: {
     text: "Fruit Sales (Bar Chart)",
     align: "center",
+    style: {
+      fontSize: "18px",
+      fontWeight: "bold",
+      color: "#333",
+    },
+  },
+  //Personaliza las etiquetas de datos que se muestran encima o dentro de las barras.
+  dataLabels: {
+    enabled: true,
+    style: {
+      colors: ["#fff"],
+      fontSize: "12px",
+    },
+  },
+  // Configura la leyenda del gráfico.
+  legend: {
+    position: "bottom",
+    fontSize: "14px",
+    markers: {
+      width: 12,
+      height: 12,
+    },
+    labels: {
+      colors: ["#333"],
+    },
+  },
+  // Personaliza el tooltip que aparece al pasar el cursor sobre un punto en el gráfico.
+  tooltip: {
+    enabled: true, //Habilita o deshabilita los tooltips.
+    theme: "dark", // Tema del tooltip (light o dark).
+    x: {
+      format: "dd MMM", // Formato para fechas
+    },
+  },
+  // Colo de la barras
+  colors: ["#4bc9cc"],
+  // Mostrar cuadricula
+  grid: {
+    show: true,
+    borderColor: "#e0e0e0",
+    strokeDashArray: 10, // Líneas punteadas
   },
 });
-
+// Datos para grafico de Bar
 const barChartSeries = ref([
   {
     name: "Sales",
@@ -102,7 +189,7 @@ const lineChartOptions = ref({
     align: "center",
   },
 });
-
+// Datos para grafico de linea
 const lineChartSeries = ref([
   {
     name: "Sales",
@@ -123,7 +210,6 @@ const areaChartOptions = ref({
     align: "center",
   },
 });
-
 // Datos para el gráfico de áreas
 const areaChartSeries = ref([
   {
@@ -136,16 +222,36 @@ const areaChartSeries = ref([
 const pieChartOptions = {
   chart: {
     type: "pie",
+    events: {
+      dataPointSelection: function (event, chartContext, config) {
+        // Captura el índice del dato seleccionado
+        const selectedLabel = config.w.config.labels[config.dataPointIndex];
+        const selectedValue = config.w.config.series[config.dataPointIndex];
+
+        // Almacena los datos seleccionados
+        selectedPieData.value = {
+          label: selectedLabel,
+          value: selectedValue,
+        };
+
+        // Para depuración puedes usar console.log
+        console.log("Torta seleccionada:", selectedPieData.value);
+      },
+    },
   },
   title: {
     text: "Fruit Sales (Pie Chart)",
     align: "center",
+    style: {
+      fontSize: "18px",
+      fontWeight: "bold",
+      color: "#333",
+    },
   },
   labels: ["Apple", "Banana", "Orange", "Grapes", "Mango"], // Etiquetas para cada parte del gráfico
 };
-
 // Datos para el gráfico circular
-const pieChartSeries = ref([30, 40, 45, 50, 49]); // Valores correspondientes a las etiquetas
+const pieChartSeries = ref([150, 50, 50, 50, 50]); // Valores correspondientes a las etiquetas
 
 // Gráfico de Donut (Donut Chart)
 const donutChartOptions = {
@@ -158,7 +264,7 @@ const donutChartOptions = {
   },
   labels: ["Apple", "Banana", "Orange", "Grapes", "Mango"],
 };
-
+// Datos para grafico de Donut
 const donutChartSeries = ref([30, 40, 45, 50, 49]);
 
 // Gráfico de Dispersión
@@ -198,7 +304,6 @@ const radarChartOptions = {
     categories: ["Sweetness", "Sourness", "Juiciness", "Fiber", "Crunchiness"],
   },
 };
-
 // Datos para el gráfico de radar
 const radarChartSeries = ref([
   {
@@ -240,7 +345,6 @@ const candlestickChartOptions = {
     intersect: false,
   },
 };
-
 // Datos para el gráfico de velas
 const candlestickChartSeries = ref([
   {
@@ -277,8 +381,14 @@ const toggleChartType = () => {
   justify-content: space-around;
   margin-top: 20px;
 }
-
 .chart-container {
-  width: 45%; /* Ajusta el ancho según sea necesario */
+  width: 100%; /* En pantallas pequeñas ocupa el 100% */
+}
+
+/* Media query para pantallas grandes */
+@media (min-width: 768px) {
+  .chart-container {
+    width: 45%; /* En pantallas grandes ocupa el 45% */
+  }
 }
 </style>

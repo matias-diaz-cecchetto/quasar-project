@@ -1,24 +1,23 @@
 <template>
   <div class="q-pa-md">
-    <q-table title="Treats" :rows="rows" :columns="columns" row-key="name">
-      <template v-slot:body-cell-acctions="props">
-        <q-td :props="props">
-          <q-btn label="Edit" @click="editRow(props.row)" color="primary" />
-          <q-btn
-            label="Delete"
-            @click="deleteRow(props.row)"
-            color="negative"
-          />
-        </q-td>
-      </template>
-    </q-table>
+    <!-- Usamos el componente hijo y le pasamos los datos como props -->
+    <span class="text-h4">Table</span>
+    <q-separator spaced="" />
+    <TableComponent
+      class="q-mt-md"
+      :rows="rows"
+      :columns="columns"
+      @edit="editRow"
+      @delete="deleteRow"
+    />
   </div>
 </template>
-
 <script setup>
 defineOptions({
   name: "TablePage",
 });
+
+import TableComponent from "../components/table/TableComponent.vue";
 
 const columns = [
   {
