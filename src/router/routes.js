@@ -1,12 +1,27 @@
+import { useAuthStore } from "../store/auth/auth";
+
 const routes = [
   {
     // Ruta para el login (fuera del layout principal)
     path: "/login",
     name: "LoginPage",
     component: () => import("src/pages/auth/LoginPage.vue"),
-    beforeEnter: (to, from, next) => {
+    /* beforeEnter: (to, from, next) => {
       // Verificar si el usuario está autenticado
       const isAuthenticated = !!localStorage.getItem("authToken");
+
+      if (isAuthenticated) {
+        // Si está autenticado, redirigir a la página principal
+        next("/");
+      } else {
+        // Si no está autenticado, permitir el acceso al login
+        next();
+      }
+    }, */
+    beforeEnter: (to, from, next) => {
+      const authStore = useAuthStore();
+      const isAuthenticated =
+        authStore.isAuthenticated || !!localStorage.getItem("authToken");
 
       if (isAuthenticated) {
         // Si está autenticado, redirigir a la página principal
@@ -56,9 +71,22 @@ const routes = [
         component: () => import("src/pages/GraphicsPage.vue"),
       },
     ],
-    beforeEnter: (to, from, next) => {
+    /* beforeEnter: (to, from, next) => {
       // Verificar si el usuario está autenticado
       const isAuthenticated = !!localStorage.getItem("authToken"); // Simulación de autenticación
+
+      if (!isAuthenticated) {
+        // Si no está autenticado, redirigir al login
+        next("/login");
+      } else {
+        // Si está autenticado, permitir el acceso
+        next();
+      }
+    }, */
+    beforeEnter: (to, from, next) => {
+      const authStore = useAuthStore();
+      const isAuthenticated =
+        authStore.isAuthenticated || !!localStorage.getItem("authToken");
 
       if (!isAuthenticated) {
         // Si no está autenticado, redirigir al login
