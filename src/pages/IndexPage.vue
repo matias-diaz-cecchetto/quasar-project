@@ -1,7 +1,8 @@
-<!-- Componente de vue -->
 <template>
   <q-page class="flex q-my-md">
-    <span class="text-h3"> Bienvenido, {{ userEmail }}</span>
+    <span class="text-h3">
+      Bienvenido, {{ userData.name }} {{ userData.apellido }}</span
+    >
     <q-separator spaced="" />
   </q-page>
 </template>
@@ -11,15 +12,15 @@ defineOptions({
   name: "IndexPage",
 });
 
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useAuthStore } from "../store/auth/auth";
-import { onMounted } from "vue";
+
 const authStore = useAuthStore();
 
-// Accede al correo electrónico desde el store
-const userEmail = computed(() => authStore.userEmail);
+// Accede a los datos completos del usuario desde el store
+const userData = computed(() => authStore.getUserData);
 
 onMounted(() => {
-  authStore.initializeAuth();
+  authStore.initializeAuth(); // Inicializar los datos del usuario al montar el componente
 });
 </script>

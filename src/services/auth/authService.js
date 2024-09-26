@@ -9,8 +9,14 @@ export function login(email, password) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (email === "mati@gmail.com" && password === "12345") {
-        // Establece el email en el store
-        authStore.setUserEmail(email);
+        const userData = {
+          email: email,
+          name: "Matias",
+          apellido: "Diaz",
+          role: "Admin",
+        };
+        // Establece el data en el store
+        authStore.setUserData(userData);
         // Notificacion
         Notify.create({
           message: "Inicio de sesión exitoso",
@@ -19,7 +25,7 @@ export function login(email, password) {
 
         //Armo la data
         const data = {
-          email: email,
+          userData,
           token: "jwt-auth",
         };
         localStorage.setItem("authToken", JSON.stringify(data));

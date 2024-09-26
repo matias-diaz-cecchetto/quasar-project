@@ -41,4 +41,10 @@ export const linksList = [
     icon: "las la-chart-bar",
     link: "GraphicPage",
   },
+  {
+    title: "PdfViewer",
+    caption: "Muestra de pdf en vista",
+    icon: "las la-file-pdf",
+    link: "PdfViewerPage",
+  },
 ];

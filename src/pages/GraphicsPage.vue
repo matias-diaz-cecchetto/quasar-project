@@ -383,6 +383,10 @@ const toggleChartType = () => {
 }
 .chart-container {
   width: 100%; /* En pantallas pequeñas ocupa el 100% */
+  border: solid 1px #ccc;
+  border-radius: 2%;
+  padding: 15px;
+  margin-top: 10px;
 }
 
 /* Media query para pantallas grandes */

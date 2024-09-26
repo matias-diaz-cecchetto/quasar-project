@@ -44,7 +44,6 @@ defineOptions({
 });
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { Notify } from "quasar";
 import { login } from "src/services/auth/authService";
 
 const router = useRouter();

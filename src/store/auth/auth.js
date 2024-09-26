@@ -6,8 +6,8 @@ export const useAuthStore = defineStore("auth", {
   state: () => ({
     // Guarda el token de autenticación del usuario, que puede ser utilizado para validar la sesión.
     authToken: null,
-    // Guarda la dirección de correo electrónico del usuario autenticado.
-    userEmail: null,
+    // Guarda almacenar datos del usuario autenticado.
+    userData: null,
   }),
 
   // Son funciones que permiten acceder a propiedades derivadas del estado
@@ -17,6 +17,12 @@ export const useAuthStore = defineStore("auth", {
       // tiene un valor. Devuelve true si el token existe, o false en caso contrario.
       return !!state.authToken;
     },
+    userEmail(state) {
+      return state.userData?.email || null; // Getter para el email del usuario
+    },
+    getUserData(state) {
+      return state.userData; // Getter para todos los datos del usuario
+    },
   },
 
   // Son métodos que permiten modificar el estado.
@@ -25,14 +31,14 @@ export const useAuthStore = defineStore("auth", {
     setAuthToken(token) {
       this.authToken = token;
     },
-    // Almacena la dirección de correo electrónico en el estado.
-    setUserEmail(email) {
-      this.userEmail = email;
+    // Almacena los datos del usuario en el estado.
+    setUserData(data) {
+      this.userData = data;
     },
-    // Limpia el estado, estableciendo authToken y userEmail a null, lo que podría usarse al cerrar sesión.
+    // Limpia el estado, estableciendo authToken y userData a null, lo que podría usarse al cerrar sesión.
     clearAuth() {
       this.authToken = null;
-      this.userEmail = null;
+      this.userData = null;
     },
     /**
      * Verifica si hay un token guardado en localStorage al cargar la aplicación.
@@ -43,7 +49,7 @@ export const useAuthStore = defineStore("auth", {
       const storedAuth = JSON.parse(localStorage.getItem("authToken"));
       if (storedAuth && storedAuth.token) {
         this.setAuthToken(storedAuth.token);
-        this.setUserEmail(storedAuth.email);
+        this.setUserData(storedAuth.userData);
       }
     },
   },

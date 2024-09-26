@@ -70,6 +70,11 @@ const routes = [
         name: "GraphicPage",
         component: () => import("src/pages/GraphicsPage.vue"),
       },
+      {
+        path: "pdf-viewer",
+        name: "PdfViewerPage",
+        component: () => import("src/pages/PdfViewerPage.vue"),
+      },
     ],
     /* beforeEnter: (to, from, next) => {
       // Verificar si el usuario está autenticado
