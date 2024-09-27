@@ -75,6 +75,11 @@ const routes = [
         name: "PdfViewerPage",
         component: () => import("src/pages/PdfViewerPage.vue"),
       },
+      {
+        path: "traductor",
+        name: "TraductorPage",
+        component: () => import("src/pages/TraductorPage.vue"),
+      },
     ],
     /* beforeEnter: (to, from, next) => {
       // Verificar si el usuario está autenticado

@@ -10,7 +10,7 @@
       <q-card
         class="no-scroll"
         style="
-          background: yellow;
+          background: gray;
           min-width: 80vw;
           min-height: 80vh;
           width: 100%;

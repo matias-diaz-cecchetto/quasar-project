@@ -47,4 +47,10 @@ export const linksList = [
     icon: "las la-file-pdf",
     link: "PdfViewerPage",
   },
+  {
+    title: "Traductor",
+    caption: "Prueba de traduccion de texto",
+    icon: "lar la-file-alt",
+    link: "TraductorPage",
+  },
 ];
