@@ -44,6 +44,17 @@
               </div>
             </div>
           </q-btn-dropdown>
+
+          <q-btn-dropdown class="q-btn--transparent" :label="locale">
+            <q-list>
+              <q-item clickable v-close-popup @click="changeLanguage('en-US')">
+                <q-item-section>English</q-item-section>
+              </q-item>
+              <q-item clickable v-close-popup @click="changeLanguage('es')">
+                <q-item-section>Español</q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
         </div>
 
         <!-- TODO: <div>Quasar v{{ $q.version }}</div> -->
@@ -52,17 +63,31 @@
 
     <!-- Propiedad para el menu lateral -->
     <!-- side="right" (abir sobre la derecha)-->
-    <q-drawer v-model="sideMenuOpen" show-if-above bordered>
-      <!-- Lista -->
+    <!-- <q-drawer v-model="sideMenuOpen" show-if-above bordered>
+      Lista
       <q-list>
-        <!-- Encabezado de la lista -->
+        Encabezado de la lista
         <q-item-label header> Essential Links </q-item-label>
 
-        <!-- Items de la lista -->
+        Items de la lista
         <EssentialLink
           v-for="link in linksList"
           :key="link.title"
           v-bind="link"
+        />
+      </q-list>
+    </q-drawer> -->
+
+    <q-drawer v-model="sideMenuOpen" show-if-above bordered>
+      <q-list>
+        <q-item-label header>{{ t("menu.essentialLinks") }}</q-item-label>
+        <EssentialLink
+          v-for="link in translatedLinksList"
+          :key="link.title"
+          :title="link.title"
+          :caption="link.caption"
+          :icon="link.icon"
+          :link="link.link"
         />
       </q-list>
     </q-drawer>
@@ -78,9 +103,10 @@ import EssentialLink from "components/EssentialLink.vue";
 import { useRouter } from "vue-router";
 import { linksList } from "../router/link-list";
 import useUI from "../composables/useUI";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { logout } from "../services/auth/authService"; // Importa tu authService
 import { useQuasar } from "quasar";
+import { useI18n } from "vue-i18n";
 
 const router = useRouter();
 const { sideMenuOpen, toggleSideMenu } = useUI();
@@ -88,12 +114,29 @@ const mobileData = ref(false);
 const bluetooth = ref(false);
 const $q = useQuasar(); // Inicializa Quasar
 
+// Configuración de i18n
+const { locale, t } = useI18n();
+
 defineOptions({
   name: "MainLayout",
 });
 
+// Enlaces traducidos
+const translatedLinksList = computed(() => {
+  return linksList.map((link) => ({
+    ...link,
+    title: t(`links.${link.title}`), // Traducción del título
+    caption: t(`captions.${link.caption}`), // Traducción del caption
+  }));
+});
+
 const navigateHome = () => {
   router.push("/");
+};
+
+// Cambio de idioma
+const changeLanguage = (lang) => {
+  locale.value = lang;
 };
 
 // Manejar logout

@@ -45,9 +45,10 @@ defineOptions({
 const showDialog = ref(false);
 const title = ref("QDialog with QPdfviewer");
 const src = ref(
-  "https://www.argentina.gob.ar/sites/default/files/ansv_licencias_manual_del_conductor.pdf"
+  "https://validaciones.sde.gob.ar/Manual/manual%20validacion%20acta%20final.pdf"
 );
-
+// https://www.argentina.gob.ar/sites/default/files/ansv_licencias_manual_del_conductor.pdf
+// https://validaciones.sde.gob.ar/Manual/manual%20validacion%20acta%20final.pdf
 function onClick() {
   showDialog.value = true;
 }

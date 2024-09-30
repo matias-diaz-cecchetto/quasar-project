@@ -80,6 +80,11 @@ const routes = [
         name: "TraductorPage",
         component: () => import("src/pages/TraductorPage.vue"),
       },
+      {
+        path: "validador",
+        name: "ValidadorPage",
+        component: () => import("src/pages/ValidadorPage.vue"),
+      },
     ],
     /* beforeEnter: (to, from, next) => {
       // Verificar si el usuario está autenticado
