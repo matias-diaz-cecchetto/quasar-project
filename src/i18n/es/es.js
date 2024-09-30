@@ -16,6 +16,7 @@ export default {
     pdf_viewer: "Visor de PDF",
     translator: "Traductor",
     validator: "Validador",
+    newValidator: "Nuevo Validador",
   },
   captions: {
     quasar_dev: "quasar.dev",
@@ -29,5 +30,7 @@ export default {
     translator_caption: "Prueba de traducción de texto",
     page_for_the_certifier_validator:
       "Pagina para el validador de certificador",
+    new_page_for_the_certifier_validator:
+      "Nueva pagina para el validador de certificador",
   },
 };

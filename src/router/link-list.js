@@ -60,4 +60,10 @@ export const linksList = [
     icon: "las la-certificate",
     link: "ValidadorPage",
   },
+  {
+    title: "newValidator",
+    caption: "new_page_for_the_certifier_validator",
+    icon: "las la-certificate",
+    link: "NewValidadorPage",
+  },
 ];

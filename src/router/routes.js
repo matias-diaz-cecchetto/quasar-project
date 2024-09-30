@@ -85,6 +85,11 @@ const routes = [
         name: "ValidadorPage",
         component: () => import("src/pages/ValidadorPage.vue"),
       },
+      {
+        path: "newValidador",
+        name: "NewValidadorPage",
+        component: () => import("src/pages/NewValidadorPage.vue"),
+      },
     ],
     /* beforeEnter: (to, from, next) => {
       // Verificar si el usuario está autenticado
